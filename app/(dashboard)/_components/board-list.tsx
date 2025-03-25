@@ -1,4 +1,5 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { EmptyBoard } from "./empty-board";
 import { EmptyFavorite } from "./empty-favorite";
 import { EmptySearch } from "./empty-search";
@@ -10,16 +11,20 @@ interface BoardListProps {
     favorite?: string;
   };
 }
-export const BoardList = ({ orgId, query }: BoardListProps) => {
+export const BoardList = ({ orgId }: BoardListProps) => {
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get("search");
+  const favorite = searchParams.get("favorite");
   const data = [];
-  if (!data?.length && query.search) {
+  if (!data?.length && search) {
     return (
       <div>
         <EmptySearch />
       </div>
     );
   }
-  if (!data?.length && query.favorite) {
+  if (!data?.length && favorite) {
     return (
       <div>
         <EmptyFavorite />
@@ -33,5 +38,5 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
       </div>
     );
   }
-  return <div>{JSON.stringify(query)}</div>;
+  return <div>{JSON.stringify({ search, favorite })}</div>;
 };
