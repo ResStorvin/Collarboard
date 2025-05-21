@@ -11,7 +11,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { on } from "events";
 
 interface ConfirmModalProps {
   children: React.ReactNode;
